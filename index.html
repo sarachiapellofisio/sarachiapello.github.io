@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dott.ssa Sara Chiapello - Fisioterapista Specializzata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0A66C2;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #0A66C2;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .profile-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 1.5rem;
+            background: url('./images/profile.jpg') center/cover no-repeat;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .current-badge {
+            display: inline-block;
+            background: #0A66C2;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }        
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .credentials {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(10, 102, 194, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            color: #0A66C2;
+            border-bottom-color: #0A66C2;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        h2 {
+            color: #0A66C2;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(10, 102, 194, 0.3);
+        }
+
+        h3 {
+            color: #0A66C2;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 8px;
+        }        
+
+        /* About section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlights {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #0A66C2;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(10, 102, 194, 0.2);
+        }
+
+        .highlights ul {
+            list-style: none;
+        }
+
+        .highlights li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0A66C2;
+            font-weight: bold;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(10, 102, 194, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #0A66C2;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(10, 102, 194, 0.3);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: #0A66C2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 24px;
+            color: white;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #0A66C2;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(10, 102, 194, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(10, 102, 194, 0.3);
+        }
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+        /* Experience */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #0A66C2;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: 50%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            width: 15px;
+            height: 15px;
+            background: #0A66C2;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(10, 102, 194, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: #0A66C2;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        .contact-item i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: white;
+            color: #0A66C2;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+                margin-left: 1rem;
+            }
+
+            .timeline-item {
+                padding: 0 0 0 3rem;
+                text-align: left !important;
+            }
+
+            .timeline-item::before {
+                left: 1rem;
+                transform: translateX(0);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                text-align: center;
+                padding: 0.8rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-section">
+                <div class="profile-img"></div>
+                <h1>Dott.ssa Sara Chiapello</h1>
+                <div class="subtitle">Fisioterapista Specializzata</div>
+                <div class="credentials">Riabilitazione Neurologica, Geriatrica e dell'Invecchiamento Attivo</div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chi-sono">Chi Sono</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#esperienza">Esperienza</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="chi-sono">
+        <div class="container">
+            <h2>Chi Sono</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Sono Sara Chiapello, Fisioterapista specializzata in Riabilitazione Neurologica, Geriatrica e dell'Invecchiamento Attivo.</p>
+                    
+                    <p>Mi sono laureata a Torino nel 2008 con 110/110, ho successivamente maturato un'esperienza di 15 anni in Clinica Riabilitativa di 2° livello.</p>
+                    
+                    <p>Attualmente lavoro come Fisioterapista Domiciliare, accompagnando i pazienti che hanno avuto un trauma o un ricovero ospedaliero nel ritorno alla loro vita e alle attività quotidiane.</p>
+                    
+                    <p>La mia filosofia professionale si basa sul mantenere e raggiungere la maggior autonomia possibile per ogni paziente, offrendo un supporto personalizzato e competente.</p>
+                </div>
+                <div class="highlights">
+                    <h3>Punti di Forza</h3>
+                    <ul>
+                        <li>15 anni di esperienza in Riabilitazione Intensiva</li>
+                        <li>Specializzazione in Riabilitazione Neurologica</li>
+                        <li>Competenza in Fisioterapia Geriatrica</li>
+                        <li>Esperienza nell'Invecchiamento Attivo</li>
+                        <li>Servizio Domiciliare Personalizzato</li>
+                        <li>Approccio centrato sul paziente</li>
+                        <li>Supporto a pazienti e familiari</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servizi">
+        <div class="container">
+            <h2>I Miei Servizi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Riabilitazione Neurologica</h3>
+                    <p>Trattamento specializzato per pazienti con patologie neurologiche come Parkinson, esiti di Ictus Cerebrale, sempre nell'ottica di mantenere o raggiungere la maggior autonomia possibile.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Fisioterapia Geriatrica</h3>
+                    <p>Programmi dedicati agli anziani per mantenere la mobilità, prevenire le cadute e migliorare la qualità della vita nell'invecchiamento attivo.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Fisioterapia Domiciliare</h3>
+                    <p>Trattamenti personalizzati a domicilio per accompagnare i pazienti nel ritorno alle attività quotidiane dopo traumi o ricoveri ospedalieri.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🦴</div>
+                    <h3>Riabilitazione Ortopedica</h3>
+                    <p>Trattamento di esiti di fratture, protesi articolari e problematiche muscolo-scheletriche con focus sul recupero funzionale.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💪</div>
+                    <h3>Attività Fisica Adattata</h3>
+                    <p>Percorsi di Attività Fisica Adattata per mantenere un buon livello di forza muscolare, equilibrio e densità ossea.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Supporto Familiare</h3>
+                    <p>Accompagnamento e supporto non solo ai pazienti ma anche ai loro familiari e assistenti, condividendo competenze tecniche e riabilitative.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="esperienza">
+        <div class="container">
+            <h2>La Mia Esperienza</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2008 - Laurea in Fisioterapia</h3>
+                        <p>Conseguimento della Laurea presso l'Università di Torino con votazione 110/110</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2008-2023 - Stella del Mattino - clinica riabilitativa</h3>
+                        <p>15 anni di esperienza in Clinica Riabilitativa di 2° livello, specializzazione in riabilitazione neurologica e geriatrica</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023-Presente - Fisioterapista Domiciliare</h3>
+                        <p>Attività libero-professionale con focus sul supporto domiciliare e la riabilitazione personalizzata</p>
+                        <span class="current-badge">IN CORSO</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023-2024 - San Camillo - RSA</h3>
+                        <p>Specializzazione in riabilitazione geriatrica, ortopedica e neurologica.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025 - Angelo Spada - RSA</h3>
+                        <p>Fisioterapia in ambito psichiatrico, gestione ausili e ortesi, riabilitazione geriatrica, ortopedica e neurologica.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025-Presente - Clorofilla - riabilitazione e benessere</h3>
+                        <p>Riabilitazione geriatrica, ortopedica, neurologica e post-operatoria.</p>
+                        <span class="current-badge">IN CORSO</span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Aree di Intervento</h2>
+            <div class="gallery">
+                <div class="gallery-item" title="Fisioterapia domiciliare">
+                    <img src="images/fisio_fisioterapiadomiciliare.png">
+                </div>
+                <div class="gallery-item" title="Fisioterapia Geriatrica">
+                    <img src="images/fisio_fisioterapiageriatrica.png">
+                </div>
+                <div class="gallery-item" title="Riabilitazione Neurologica">
+                    <img src="images/fisio_riabilitazioneneurologica.png">
+                </div>
+                <div class="gallery-item" title="Ausili ed adattamenti ambientali">
+                    <img src="images/fisio_ausiliadattamentiambientali.png">
+                </div>
+                <div class="gallery-item" title="Riabilitazione Ortopedica\">
+                    <img src="images/fisio_riabilitazioneortopedica.png">
+                </div>
+                <div class="gallery-item" title="Supporto Familiare">
+                    <img src="images/fisio_supportofamiliare.png">
+                </div>
+                <div class="gallery-item" title="Attività fisica adattata">
+                    <img src="images/fisio_attivitafisicaadattata.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contatti" class="contact-section">
+        <div class="container">
+            <h2>Contatti</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informazioni di Contatto</h3>
+                    
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <div>
+                            <strong>Area di Servizio:</strong><br>
+                            Fossano, Verzuolo e dintorni
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>🕐</span>
+                        <div>
+                            <strong>Orari:</strong><br>
+                            Su appuntamento
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span>🏥</span>
+                        <div>
+                            <strong>Servizio:</strong><br>
+                            Fisioterapia Domiciliare
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.miodottore.it/sara-chiapello/fisioterapista/verzuolo" target="_blank" title="MioDottore">
+                            👩‍⚕️ Mio Dottore
+                        </a>
+                        <a href="https://share.google/QNhoxIxc7BGw0M1EX" target="_blank" title="Google">
+                            📱 Google
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Richiedi Informazioni</h3>
+                    <div id="form-message"></div>
+                    <form id="contactForm" action="https://formspree.io/f/xblkperr" method="POST">
+                        <div class="form-group">
+                            <label for="nome">Nome e Cognome *</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefono">Telefono *</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="messaggio">Messaggio *</label>
+                            <textarea id="messaggio" name="messaggio" placeholder="Descrivi brevemente la tua richiesta..." required></textarea>
+                        </div>
+                        
+                        <!-- Campo nascosto per identificare il form -->
+                        <input type="hidden" name="_subject" value="Nuova richiesta dal sito web - Dott.ssa Sara Chiapello">
+                        
+                        <!-- Reindirizzamento dopo invio
+                        <input type="hidden" name="_next" value="https://tuosito.com/grazie.html"> -->
+                        
+                        <!-- Prevenire spam -->
+                        <input type="text" name="_gotcha" style="display:none;">
+                        
+                        <button type="submit" class="btn-submit" id="submit-btn">Invia Richiesta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dott.ssa Sara Chiapello - Fisioterapista. Tutti i diritti riservati.</p>
+            <p>Iscrizione Albo Ordine inter regionale della Professione Sanitaria di Fisioterapista <br> del Piemonte e della Valle d'Aosta | Numero 2044</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+//         // Contact form handling
+//         document.getElementById('contactForm').addEventListener('submit', function(e) {
+//             e.preventDefault();
+            
+//             const nome = document.getElementById('nome').value;
+//             const telefono = document.getElementById('telefono').value;
+//             const email = document.getElementById('email').value;
+//             const messaggio = document.getElementById('messaggio').value;
+            
+//             // Create mailto link
+//             const subject = encodeURIComponent('Richiesta informazioni fisioterapia');
+//             const body = encodeURIComponent(`
+// Nome: ${nome}
+// Telefono: ${telefono}
+// Email: ${email}
+
+// Messaggio:
+// ${messaggio}
+//             `);
+            
+//             // You would replace this with the actual email
+//             const mailtoLink = `mailto:info@sarachiapello.it?subject=${subject}&body=${body}`;
+//             window.location.href = mailtoLink;
+            
+//             alert('Ti ringrazio per il tuo interesse! Il tuo client email si aprirà per inviare il messaggio.');
+//         });
+
+        // Add active state to navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
